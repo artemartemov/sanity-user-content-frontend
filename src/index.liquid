@@ -26,14 +26,16 @@ tutorial:
     <h2>Suggested Names</h2>
     <ul>
       {% for name in corgi.suggestedNames  %}
-       <form>
+
         <li>
+          <form>
           {{ name.name }} - <span class="votes">{{ name.votes }}</span> votes
           <input type="hidden" name="corgiId" value="{{ corgi._id  }}" />
           <input type="hidden" name="nameKey" value="{{ name._key }}" />
           <button>Vote For This Name</button>
-        </li>
         </form>
+        </li>
+
       {% endfor  %}
     </ul>
   </div>
@@ -50,15 +52,15 @@ tutorial:
 
     const result = await fetch('/.netlify/functions/vote-for-name', {
       method: 'POST',
-      body: JSON.stringify({ corgiId, nameKey })
+      body: JSON.stringify({ corgiId, nameKey }),
     })
     .then((res) => res.json())
-    .catch((err) => console.error(err))
+    .catch((err) => console.error("err", err));
 
     console.log(result);
 
     const voteNode = event.target.querySelector('.votes');
-    voteNode.innerText = '37'
+    voteNode.innerText = "37"
   }
 
   const forms = document.querySelectorAll('form')
